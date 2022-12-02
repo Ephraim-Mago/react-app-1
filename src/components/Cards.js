@@ -5,9 +5,9 @@ function Cards({ data }) {
     return (
         <>
             {
-                data.map((element) => {
+                data.map((element, c) => {
                     return (
-                        <Card style={{ width: '20rem', border: 'none' }} className="hove mb-4" key={element.id}>
+                        <Card style={{ width: '20rem', border: 'none' }} className="hove mb-4" key={c}>
                             <Card.Img variant="top" className='cd' src={element.imgdata} />
 
                             <div className='card_body'>

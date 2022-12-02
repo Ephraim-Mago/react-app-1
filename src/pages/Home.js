@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import FoodData from '../assets/data/FoodData';
+//import FoodData from '../assets/data/FoodData';
+import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Cards from '../components/Cards';
 import Set from '../components/Set';
@@ -9,9 +10,8 @@ function Home() {
 
     const [copydata, setCopyData] = useState([]);
 
-    // console.log(copydata);
-
     const zomalogo = "https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png";
+    const url = 'http://api-v3.myartsonline.com/api/foods?API_KEY=ZXBocmFpbS1tYWdvL2Vjb20tYXBpLXYxLzIwMjI=';
 
     const changeData = (e) => {
         let getChangeData = e.toLowerCase();
@@ -27,7 +27,12 @@ function Home() {
     }
 
     useEffect(() => {
-        setFData(FoodData);
+        //setFData(FoodData);
+        axios.get(url, {
+            mode: 'no-cors', // no-cors, *cors, same-origin
+        })
+            .then(res => setFData(res.data.data))
+            .catch(err => console.log(err))
     }, []);
 
     useEffect(() => {
