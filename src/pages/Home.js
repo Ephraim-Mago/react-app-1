@@ -5,7 +5,7 @@ import Cards from '../components/Cards';
 import Set from '../components/Set';
 
 function Home() {
-    const [fdata, setFData] = useState(FoodData);
+    const fdata = [FoodData];
 
     const [copydata, setCopyData] = useState([]);
 
