@@ -5,7 +5,7 @@ import Cards from '../components/Cards';
 import Set from '../components/Set';
 
 function Home() {
-    const fdata = [FoodData];
+    const [fdata, setFData] = useState([]);
 
     const [copydata, setCopyData] = useState([]);
 
@@ -27,10 +27,14 @@ function Home() {
     }
 
     useEffect(() => {
-        setTimeout(() => {
-            setCopyData(FoodData);
-        }, 3000);
+        setFData(FoodData);
     }, []);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setCopyData(fdata);
+        }, 3000);
+    }, [fdata]);
 
     return (
         <>
