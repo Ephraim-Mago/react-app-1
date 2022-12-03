@@ -6,9 +6,9 @@ const Set = ({ sdata }) => {
     return (
         <>
             {
-                sdata.map((ele, k) => {
+                sdata.map((ele) => {
                     return (
-                        <Stack spacing={1} style={{ width: "22rem" }} className="mb-4" key={k}>
+                        <Stack spacing={1} style={{ width: "22rem" }} className="mb-4" key={ele.id}>
                             <Skeleton variant="rectangular" animation="wave" width={"21rem"} height={200} className="rounded" />
                             <div className='d-flex justify-content-between'>
                                 <Skeleton variant="text" animation="wave" width={"12rem"} />

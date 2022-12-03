@@ -6,40 +6,46 @@ import Cards from '../components/Cards';
 import Set from '../components/Set';
 
 function Home() {
-    const [fdata, setFData] = useState([]);
+    const [data, setData] = useState([]);
 
     const [copydata, setCopyData] = useState([]);
 
     const zomalogo = "https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png";
-    const url = 'https://v4.oasisrdcongo.org/api/foods?API_KEY=ZXBocmFpbS1tYWdvL2Vjb20tYXBpLXYxLzIwMjI=';
+    const API_KEY = "?API_KEY=ZXBocmFpbS1tYWdvL2Vjb20tYXBpLXYxLzIwMjI=";
+    const url = "https://v4.oasisrdcongo.org/api/";
+    const config = {
+        mode: 'cors'
+    };
+
+    const fetch = async (path) => {
+        let action = url + path + API_KEY;
+        await axios.get(action, config)
+            .then(res => setData(res.data.data))
+            .catch(err => console.log(err.message));
+    };
 
     const changeData = (e) => {
         let getChangeData = e.toLowerCase();
 
         if (getChangeData === "") {
-            setCopyData(fdata);
+            setCopyData(data);
         } else {
             let storeData = copydata.filter((element) => {
                 return element.rname.toLowerCase().match(getChangeData);
             });
             setCopyData(storeData);
         }
-    }
+    };
 
     useEffect(() => {
-        //setFData(FoodData);
-        axios.get(url, {
-            mode: 'no-cors', // no-cors, *cors, same-origin
-        })
-            .then(res => setFData(res.data.data))
-            .catch(err => console.log(err))
+        fetch('foods');
     }, []);
 
     useEffect(() => {
         setTimeout(() => {
-            setCopyData(fdata);
+            setCopyData(data);
         }, 3000);
-    }, [fdata]);
+    }, [data]);
 
     return (
         <>
@@ -66,7 +72,7 @@ function Home() {
                 <h2 className='px-4' style={{ fontWeight: 400 }}>Restaurants in Ahmedabad Open now</h2>
 
                 <div className='row mt-2 d-flex justify-content-around align-items-center'>
-                    {copydata && copydata.length ? <Cards data={copydata} /> : <Set sdata={fdata} />}
+                    {copydata && copydata.length ? <Cards data={copydata} /> : <Set sdata={data} />}
                 </div>
             </section>
         </>
